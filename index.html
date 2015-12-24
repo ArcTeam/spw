@@ -101,7 +101,7 @@
                     "spw15" : {url: "models/spw15.nxs"}
                 },
                 modelInstances : {
-                    "01" : {
+                    "spw01" : {
                         mesh : "spw01",
                         //transform : { matrix: SglMat4.translation([0.0, 117.0, 0.0]) },
                         tags: ["Group"]
@@ -137,6 +137,12 @@
                         visible: false
                     }
                     ,"spw07" : {
+                        mesh : "spw07",
+                        //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                        tags: ["Group"],
+                        visible: false
+                    }
+                    ,"spw08" : {
                         mesh : "spw08",
                         //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
                         tags: ["Group"],
@@ -185,7 +191,6 @@
                         visible: false
                     }
                 },
-                
                 trackball: {
                     type : TurnTableTrackball,
                     trackOptions : {
