@@ -9,10 +9,7 @@ a:focus, a:hover{text-decoration: none;}
 .hide{display:none;}
 
 #tool{position: absolute;top: 5px; text-align: center; width: 100%;z-index:100;}
-#description > .row:first-child{height:60%;}
-#description > .row:nth-child(2){height:38%;}
-#modelDescription { position: relative; height: 90%; border-bottom: 1px solid #ccc; overflow: auto; margin-bottom: 10px;}
-#modelPhoto{position:relative;height:100%;background-position: center center;background-repeat: no-repeat; background-size: contain; margin: 0 auto;}
+#modelPhoto{position:relative;background-position: center center;background-repeat: no-repeat; background-size: contain; margin: 0 auto;}
 
 
 /* dock menu */
@@ -53,15 +50,19 @@ a.dock-item {display: block;width: 60px;color: #000;position: absolute;bottom: 0
 
 @media screen and (max-width: 767px){
   canvas{height:500px;background:#ddd;}
+  #modelPhoto{height:400px;}
 }
 @media (min-width: 768px) and (max-width: 991px) {
   canvas{height:500px;background:#ddd;}
+  #modelPhoto{height:400px;}
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   canvas{height:600px;background:#ddd;}
+  #modelPhoto{height:400px;}
 }
 @media (min-width: 992px) and (max-width: 1199px)and (orientation: landscape){
   canvas{height:600px;background:#ddd;}
+  #modelPhoto{height:400px;}
 }
 
 @media screen and (min-width: 1200px) {
@@ -69,4 +70,8 @@ a.dock-item {display: block;width: 60px;color: #000;position: absolute;bottom: 0
   .first-row{height:90%;border-bottom:1px solid #ccc;}
   .col-sx{border-right:1px solid #ccc;}
   #draw-canvas{width:100% !important; height:100% !important; z-index:3;}
+  #description > .row:first-child{height:60%;}
+  #description > .row:nth-child(2){height:38%;}
+  #modelDescription { position: relative; height: 90%; border-bottom: 1px solid #ccc; overflow: auto; margin-bottom: 10px;}
+  #modelPhoto{height:100%;}
 }
