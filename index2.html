@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Giuseppe Naponiello (Arc-Team s.r.l.)" >
+    <meta name="robots" content="INDEX,FOLLOW" />
+    <meta name="copyright" content="&copy;2015 Arc-Team" />
+    <meta name="description" content="model 3d viewer" />
+    <meta name="keywords"  content="webgis, comunity, storia, archeologia, ambiente, open source, open data" />
+    <title>SPW - Plaetzweise and the First World War</title>
+    <link type="text/css" rel="stylesheet" href="stylesheet/style.css"/>
+    <!--[if lt IE 7]>
+    <style type="text/css"> .dock img { behavior: url(iepngfix.htc) } </style>
+    <![endif]-->
+
+  </head>
+  <body>
+    <div class="container-fluid main">
+      <div class="col-lg-9 main col-sx">
+        <div class="row first-row">
+          <div id="3dhop" class="col-xs-12 main" onmousedown="if (event.preventDefault) event.preventDefault()">
+            <div id="tool">
+              <div class="btn-group" role="group" aria-label="...">
+                <button id="showMobile" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+                </button>
+                <ul id="model-list" class="dropdown-menu">
+
+                </ul>
+                <button id="home" type="button" class="btn btn-default" title="Torna allo zoom iniziale"><i class="fa fa-home fa-2x"></i></button>
+                <button id="zoomin" title="Zoom in" type="button" class="btn btn-default"><i class="fa fa-search-plus fa-2x"></i></button>
+                <button id="zoomout" title="Zoom out" type="button" class="btn btn-default"><i class="fa fa-search-minus fa-2x"></i></button>
+                <button id="light" title="Light On/Off" type="button" class="btn btn-default"><i class="fa fa-lightbulb-o fa-2x"></i></button>
+
+              </div>
+            </div>
+            <canvas id="draw-canvas" />
+          </div>
+        </div>
+        <div class="row">
+          <div id="thumb" class="col-xs-12">
+            <div class="dock" id="dock">
+              <div class="dock-container">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="row">
+          <div id="description" class="col-xs-12">
+            <h1 id="modelName">Model: <span></span></h1>
+            <div id="modelDescription"></div>
+            <div id="modelPhoto"></div>
+            <div id="descFooter">
+              <small>
+                Created by <a href="http://www.arc-team.com" target="_blank" title="[external link] go to arc-team website">Arc-Team</a> |
+                Powered by <a href="http://vcg.isti.cnr.it/3dhop/" target="_blank" title="[external link] go to project website">3DHOP</a>
+                <a href="http://vcg.isti.cnr.it" target="_blank" title="[external link] go to Visual Computing Lab website">C.N.R.-I.S.T.I.</a>
+              </small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+  <script src="https://use.fontawesome.com/c00c4cc98c.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="js/interface.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/spidergl.js"></script>
+  <script src="js/presenter.js"></script>
+  <script src="js/nexus.js"></script>
+  <script src="js/ply.js"></script>
+  <script src="js/trackball_sphere.js"></script>
+  <script src="js/trackball_turntable.js"></script>
+  <script src="js/trackball_turntable_pan.js"></script>
+  <script src="js/trackball_pantilt.js"></script>
+  <script src="js/init.js"></script>
+  <script>
+      var presenter = null;
+      var thumb=new Array();
+      thumb.push({img:'icons/spw01.png', foto:'spw01.jpg', name:'Schützengraben am Knollkopf', desc:'<p>Das Modell zeigt einen gemauerten Schützengraben auf dem Knollkopf. Diese Infanterieverteidigungsanlage gehört in die Phase unmittelbar vor Ausbruch des Ersten Weltkrieges an der Hochgebirgsfront. Zu diesem Zeitpunkt war das nahegelegene Werk Plätzwiese bereits veraltet und konnte dem Beschuss moderner Artillerie nicht mehr standhalten. Deshalb entschloss man sich, Feldstellungen an den Flanken der Festung zu errichten. Man erreicht einen Quergraben mit steil nach unten weisenden Schießscharten durch einen Laufgraben von der Rückseite des Knollkopfes. Das ursprünglich vorhandene Dach ist nicht mehr erhalten. An der Außenseite der Fassade befinden sich Drahtschlingen, an die Sträucher oder Latschenäste zur Tarnung gehängt werden konnten. </p>'   , tag:'spw01'});
+      thumb.push({img:'icons/spw02.png', foto:'spw02.jpg',name:'Kommandogebäude',desc:'<p>Die Reste dieses betonierten Gebäudes liegen auf der Rückseite des Knollkopfes und waren damit vor direktem Artilleriefeuer geschützt. Die dicken Mauern und die Bauweise in Beton läßt die Vermutung zu, dass er sich hier um ein Kommandogebäude gehandelt hat. Von der rückwärtigen Wand führt ein Eingang in eine Kaverne. Der Gang verzweigt sich bereits nach wenigen Metern und führte ursprünglich wohl in zwei getrennte Kammern. Nachgerutschtes Material hat die Kaverne großteils wieder aufgefüllt. Die Betontrümmer lassen darauf schließen, dass das Dach des Gebäudes nach dem Krieg zur Metallgewinnung abgebrochen oder gesprengt worden ist.  Normalerweise waren die Decken der betonierten Stellungen mit Eisenträgern verstärkt.</p>',tag:'spw02'});
+      thumb.push({img:'icons/spw03.png', foto:'spw03.jpg',name:'Seilbahnen',desc:'<p>Der Betonklotz mit ca. einem Meter Seitenlänge diente als Fundament für eine Seilbahnstütze. Drei Gewindestangen an der Oberseite, sowie linienförmige Abdrücke im Beton lassen auf die Ausrichtung der Seilbahn schließen. Das Objekt liegt auf einem Felsspron am oberen Ende des Knappenfußtales. Von hier verlief eine Seilbahn hinunter zum Gemärk-Pass. Über eine andere Seilbahn wurde der Nachschub vom Pragsertal auf die Hochfläche geliefert. Dieses Fundament belegt eindeutig die Existenz einer weiteren Seilbahn auf der Hochfläche der Plätzwiese, die sonst in den Archivunterlagen nicht auftaucht .</p>  '   ,tag:'spw03'});
+      thumb.push({img:'icons/spw04.png', foto:'spw04.jpg', name:'Straßen',desc:'<p>Vom Heissenwiesele bis zur Ringlerwiese verläuft der sogenannte „Knittelweg“. Auf mehreren längsgerichteten Stangen wurde eine Reihe von etwa 8 bis 10 cm dicken Rundhölzern gelegt und mit Drahtschlingen verknüpft. Trotz der Bodenlage und der Bewitterung haben sich über eine Länge von rund 600 Metern große Teile dieser Straßenbefestigung erhalten. Zum Knittelweg gehören auch die Reste einer Holzbrücke, über die ein Seitenast der Straé zum Knollkopf führte. Ihr Bau wird dem Deutschen Alpenkorps im Jahr 1915 zugeschrieben.</p>',tag:'spw04'});
+      thumb.push({img:'icons/spw05.png', foto:'spw05.jpg', name:'Unterstände',desc:'<p>Um Unterstände vor Artilleriefeuer zu schützen, wurden sie häufig an der dem Feind abgewendeten Seite von Felswänden erbaut. Dazu wurden rechteckige Nischen in den Fels gebrochen und Terrassen geschaffen, auf denen dann die Holzgebäude errichtet werden konnten. In diesem Fall wurde auf dem Weg vom Knoll- zum Rautkopf eine künstliche Terrasse mit Beton gegossen. Vom hölzernen Aufbau sind hier nur wenige Spuren erhalten geblieben.</p>',tag:'spw05'});
+      thumb.push({img:'icons/spw06.png', foto:'spw06.jpg', name:'Ein Denkmal',desc:'<p>Dieser Steinpfeiler auf dem Strudelsattel wurde als Denkmal für den Einsatz des Deutschen Alpenkorps auf der Plätzwiese im Jahr 1915 errichtet. Er steht in einer Reihe mit ähnlichen Monumenten, die von den deutschen Gebirgstruppen vor deren Abzug im Herbst 1915 errichtet worden sind. Ursprünglich soll sich auch eine Inschrift auf dem Pfeiler befunden haben. Sie ist in der faschistischen Ära jedoch verschwunden.</p>',tag:'spw06'});
+      thumb.push({img:'icons/spw07.png', foto:'spw07.jpg', name:'Unterkunftobjekt I',desc:'<p>Dieses makante Gebäude befindet sich auf dem Strudelsattel und liegt auf dem höchsten Punkt des Verbindungsweges vom Werk Landro zum Werk Plätzwiese. Seine Errichtung geht auf das Jahr 1914/15 zurück und ist somit in die Zeit der Kriegsvorbereitungen zu datieren. Es wird in den militärischen Unterlagen der k.u.k. Armee als „Unterkunftsobjekt I“ bezeichnet. Das rund 100m2 große Gebäude wurde aus gemauerten Bruchsteinen errichtet und hatte ursprünglich eine flaches Betondach. Das Dach wurde wahrscheinlich nach dem Krieg zur Gewinnung der verbauten Eisenschienen entfernt. Haufen von dessen Betontrümmern liegen rund um das Gebäude verteilt.</p><h2>Hauptraum</h2><p>Im Hauptraum des Unterkunftsobjektes I konnten laut militärischen Unterlagen 50 Soldaten 	untergebracht werden. Die Fenster dienten zugleich als Schießscharten.</p><h2>Offiziersunterkunft</h2><p>In diesem Raum waren bis zu drei Offiziere untergebacht. Darunter befand sich ein Proviantkeller, der auch von außen zugänglich war.</p><h2>Küche</h2><p>In diesem Raum befand sich die Küche mit einer Zisterne. Hier haben sich im Inneren noch Trümmer des Daches erhalten.</p>',tag:'spw07'});
+      thumb.push({img:'icons/spw08.png', foto:'spw08.jpg', name:'Ein Andenken aus Prag',desc:'<p>An der Rückwand des sogenannten „Unterkunftsobjektes II“ in der Strudl, haben sich beim Bau des Gebäudes mehrere Soldaten im frischen Mörtel mit ihren Namen und ihrer Heimatstadt verewigt. Der multinationale Charakter des Habsburgerreiches läßt sich hier sehr gut ablesen, denn die Soldaten stammten aus Prag im damaligen Königreich Böhmen: Gut lassen sich noch die Namen R. KUPAT, H. KASTNER und PAN PODAPKA lesen, allesamt aus PRAHA (Prag). Ein weiterer Name links unten ist nicht mehr sicher lesbar.</p>',tag:'spw08'});
+      thumb.push({img:'icons/spw09.png', foto:'spw09.jpg',name:'Munitionsdepot',desc:'<p>Ebenfalls in die unmittelbare Vorkriegszeit fällt die Errichtung der sog. „Kampfanlage Strudelalpe-Geierwand“ zu der auch die Unterkunftsobjekte gehörten. Sie bestand aus offenen Artilleriestellungen, Verbindungswegen, Beobachtungspositionen und Munitionsdepots. Hier sehen wir die Reste des sogenannten „Munitionsunterstandes Nr. 8“, wenige Meter vom „Kanonenstand Nr. 4“ entfernt. Das Depot war in den Boden eingetieft und bot der empfindlichen Munitions damit zusätzlichen Schutz. Auch in diesem Fall ist das Fehlen des Daches wahrscheinlich auf einen Abbau nach dem Krieg zurückzuführen.</p>',tag:'spw09'});
+      thumb.push({img:'icons/spw10.png', foto:'spw10.jpg',name:'Beobachter',desc:'<p>Im Ersten Weltkrieg war die Artillerie immer auf sogenannte "Artilleriebeobachter" angewiesen, welche den Geschützbesatzungen ihre Ziele angaben und die Wirkung der Schüsse beim Feind beobachteten. Sie gaben meist über Telephon Korrekturen an die Kanoniere weiter, wenn diese das anvisierte Ziel verfehlt hatten. Zur "Kampfanlage Strudelalpe-Geierwand“ gehörten 3 „Beobachtungsstände". Hier sehen wir das Modell von Nummer 2. Der Betonbau ist wiederum in die Erde eingetieft um wenig Angriffsfläche zu bieten. Von hier aus konnte man in Richtung Rautkofel, Schwalbenkofel, Rienztal, Monte Piano und Paludi di Misurina beobachten.</p>',tag:'spw10'});
+      thumb.push({img:'icons/spw11.png', foto:'spw11.jpg',name:'1916',desc:'<p>Der Erste Weltkrieg brachte auf der Plätzwiese großangelegte Ausbauten der bereits vorhandenen Stellungen mit sich. Was vor dem Krieg in Bruchstein gemauert wurde, errichetet man nun in Beton oder direkt im Fels. Diese Bauinschrift, die mit einem Model beim Gießen des Betons ausgespart worden ist, datiert diese Stellung auf das Jahr 1916. Es handelt sich um eine neu angelegte Geschützstellung für eine 10cm Panzerhaubitze mit Kaverne und Beobachtungsstand. Rechts neben der Inschrift ist der Abstieg in die Kaverne zu erkennen</p>',tag:'spw11'});
+      thumb.push({img:'icons/spw12.png', foto:'spw12.jpg',name:'1917',desc:'<p>Oftmals sind die Spuren des Ersten Weltkrieges nur schwer zu lesen. Die über diesem Kaverneneingang beim "Munitionsdepot der Kanonenbatterie" - einem Teil der "Kampfanlage Strudelalpe-Geierwand" - eingeritzte Jahreszahl ist nur zu bestimmten Tageszeiten sichtbar. Im 3D-Modell, mit der Möglichkeit, die Richtung des Lichtes zu verändern, kann man die Reste der Zahl "1917" deutlich erkennen. Hier wurde somit erst im letzten Kriegsjahr an der Dolomitenfront eine neue Kavernenanlage errichtet.</p>',tag:'spw12'});
+      thumb.push({img:'icons/spw13.png', foto:'spw13.jpg',name:'Ausbauten im Krieg',desc:'<p>Diese große Kavernenanlage befindet sich unterhalb der 12cm Kanonenbatterie auf der Geierwand. Auch hier gab es bereits vorbereitende Arbeiten vor dem Ausbruch des Krieges, die dann aber wesentlich verstärkt werden mussten. Man suchte im Inneren des Berges Schutz vor Artilleriefeuer. Die Kaverene ist teilweise eingestürzt, es sind aber noch 2 betonierte Herdstellen gut erhalten. Die Anlage hat eine heute immer noch eine Grundfläche von rund 50m2.</p>',tag:'spw13'});
+      thumb.push({img:'icons/spw14.png', foto:'spw14.jpg',name:'Bauverbot',desc:'<p>Auf der Plätzwiese haben sich auch Reste der einstigen Grundstücke im österreichischen Staatbesitz erhalten, so bildet z.B. der Beobachtungsstand 3 der "Kampfanlage Strudelalpe-Geierwand" heute noch eine eigene Parzelle mit der Größe von 50m2. Dieser Granitstein mit der Aufschrift "FR XVIII" befindet sich im oberen Seelandttal und steht mit dem genau 500m entfernten Werk Plätzwiese in Verbindung. In diesem Fall begrenzete der Stein den sogenannten "Bauverbotsrayon", einen 500 Meter breiten Streifen rund um das Werk, auf dem entweder gar nicht oder nur unter strengen Auflagen gebaut werden durfte. So konnten Gebäude innerhalb des Rayons im Kriegsfall gesprengt werden. Ähnliche Steine sind auch von der Sperre Sexten bekannt.</p>',tag:'spw14'});
+      thumb.push({img:'icons/spw15.png', foto:'spw15.jpg',name:'Eine Mannschaftskaverne',desc:'<p>Sicheren Schutz vor Artilleriefeuer boten nur in den Berg vorgetriebene Kavernen. Dort konnte Munition gelagert, gekocht, aber auch gewohnt werden. Beispile wie diese Mannschaftskaverne gibt es auf der Plätzwiese mehrere. Dieses Exemplar ist rund 20 m tief, 3.7 m breit und 2.5 m hoch. Der Eingang ist mit Beton verstärkt worden und war ursprünglich mit einem Vorbau aus Holz versehen. Links vom Eingang haben sich die Reste eines Herdes erhalten. Die zahlreichen verfaulten Bretter auf dem Boden lassen darauf schließen, dass das Innere der Kaverne ursprünglich mit Holz verkleidet war. Auch dafür gibt es viele Vergleichsbeispiele. Dieses Objekt liegt am Weg zum Gipfel des Knollkopfs.</p>',tag:'spw15'});
+      var tw = $('#thumbWrap').width();
+      var th = $('#thumbWrap').height();
+
+      function setup3dhop() {
+          presenter = new Presenter("draw-canvas");
+          presenter.setScene({
+              meshes: {
+                  "spw01" : {url: "models/spw01.nxs"},
+                  "spw02" : {url: "models/spw02.nxs"},
+                  "spw03" : {url: "models/spw03.nxs"},
+                  "spw04" : {url: "models/spw04.nxs"},
+                  "spw05" : {url: "models/spw05.nxs"},
+                  "spw06" : {url: "models/spw06.nxs"},
+                  "spw07" : {url: "models/spw07.nxs"},
+                  "spw08" : {url: "models/spw08.nxs"},
+                  "spw09" : {url: "models/spw09.nxs"},
+                  "spw10" : {url: "models/spw10.nxs"},
+                  "spw11" : {url: "models/spw11.nxs"},
+                  "spw12" : {url: "models/spw12.nxs"},
+                  "spw13" : {url: "models/spw13.nxs"},
+                  "spw14" : {url: "models/spw14.nxs"},
+                  "spw15" : {url: "models/spw15.nxs"}
+              },
+              modelInstances : {
+                  "spw01" : {
+                      mesh : "spw01",
+                      //transform : { matrix: SglMat4.translation([0.0, 117.0, 0.0]) },
+                      tags: ["Group"]
+                  }
+                 ,"spw02" : {
+                      mesh : "spw02",
+                      //transform : { matrix: SglMat4.mul(SglMat4.translation([0.0, 75.0, 0.0]), SglMat4.scaling([ 0.3, 0.3, 0.3])) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                 ,"spw03" : {
+                      mesh : "spw03",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                 ,"spw04" : {
+                      mesh : "spw04",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw05" : {
+                      mesh : "spw05",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw06" : {
+                      mesh : "spw06",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw07" : {
+                      mesh : "spw07",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw08" : {
+                      mesh : "spw08",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw09" : {
+                      mesh : "spw09",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw10" : {
+                      mesh : "spw10",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw11" : {
+                      mesh : "spw11",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw12" : {
+                      mesh : "spw12",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw13" : {
+                      mesh : "spw13",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw14" : {
+                      mesh : "spw14",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+                  ,"spw15" : {
+                      mesh : "spw15",
+                      //transform : { matrix: SglMat4.translation([0.0, 5.0, 0.0]) },
+                      tags: ["Group"],
+                      visible: false
+                  }
+              },
+              trackball: {
+                  type : TurnTableTrackball,
+                  trackOptions : {
+                      startDistance : 2.0,
+                      minMaxDist    : [1.25, 4.0],
+                      minMaxTheta   : [-30.0, 80.0]
+                  }
+              },
+              space : {
+                  //centerMode : "explicit",
+                  //radiusMode : "specific",
+                  //whichInstanceRadius  : "Base",
+                  //explicitCenter   : [0.0, 70.0, 0.0]
+              }
+          });
+      }
+      function actionsToolbar(action) {
+          if(action=='home') presenter.resetTrackball();
+          else if(action=='zoomin') presenter.zoomIn();
+          else if(action=='zoomout') presenter.zoomOut();
+          else if(action=='light' || action=='light_on') { presenter.enableLightTrackball(!presenter.isLightTrackballEnabled()); lightSwitch(); }
+      }
+
+      $(document).ready(function(){
+          init3dhop();
+          setup3dhop();
+          setMenu();
+          $.each( thumb, function( key, value ) {
+            $(".dock-container").append("<a class='dock-item change-model' href='#'  data-name='"+value.name+"' data-desc='"+value.desc+"' data-foto='"+value.foto+"' data-tag='"+value.tag+"'><span>"+value.name+"</span><img src='"+value.img+"' alt='"+value.name+"' /></a>");
+
+            $("#model-list").append("<li><a href='#' class='change-model' data-name='"+value.name+"' data-desc='"+value.desc+"' data-foto='"+value.foto+"' data-tag='"+value.tag+"'>"+value.name+"</a></li>");
+
+          });
+          $(".change-model").click(function(){
+            $("#modelDescription").html($(this).data('desc'));
+            $("#modelName span").html($(this).data('name'));
+            $("#modelPhoto").css('background-image', 'url(foto/thumb/' + $(this).data('foto') + ')');
+            presenter.setInstanceVisibility('Group', false, false);
+            presenter.setInstanceVisibilityByName($(this).data('tag'), true, true);
+          });
+          $("#modelName span").html($(".dock-item:first-child()").data('name'));
+          $("#modelDescription").html($(".dock-item:first-child()").data('desc'));
+          $("#modelPhoto").css('background-image', 'url(foto/thumb/' + $(".dock-item:first-child()").data('foto') + ')');
+
+          $('#dock').Fisheye({
+            maxWidth: 60,
+            items: 'a',
+            itemsText: 'span',
+            container: '.dock-container',
+            itemWidth: 40,
+            proximity: 80,
+            alignment : 'left',
+            valign: 'bottom',
+            halign : 'center'
+          });
+      });
+  </script>
+</html>

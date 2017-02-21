@@ -1,7 +1,7 @@
 /*
 3DHOP - 3D Heritage Online Presenter
 Copyright (c) 2014, Marco Callieri - Visual Computing Lab, ISTI - CNR
-All rights reserved.    
+All rights reserved.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ function init3dhop() {
         .mouseup(function(e) {
             ismousedown = false;
             if(e.button==button){
-                clearInterval(interval); 
+                clearInterval(interval);
                 $(this).css("opacity","0.8");
                 button=0;
             }
@@ -49,7 +49,7 @@ function init3dhop() {
         .on('touchmove', function(e) {clearInterval(interval);})
     ;
     resizeCanvas($('#3dhop').width(),$('#3dhop').height());
-} 
+}
 
 function lightSwitch() {
     var on = presenter.isLightTrackballEnabled();
@@ -59,5 +59,21 @@ function resizeCanvas(w,h) {
   $('#draw-canvas').attr('width', w);
   $('#draw-canvas').attr('height',h);
   $('#3dhop').css('width', w);
-  $('#3dhop').css('height', h);  
+  $('#3dhop').css('height', h);
+}
+
+function getDevice(){
+  return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+}
+function setMenu(){
+  var get = getDevice();
+  //var set;
+  if (get){
+    //set = 'mobile';
+    $("#thumb").hide();
+  }else{
+    $("#showMobile").hide();
+    //set = "desktop";
+  }
+  //return set;
 }

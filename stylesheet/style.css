@@ -1,0 +1,63 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,200,700);
+@import url("bootstrap.min.css");
+
+html,body{width:100%;height:100%;}
+html { position: relative; min-height: 100%; color: #363A3F;background: #fff;}
+body{font-family: 'Titillium Web', Helvetica, sans-serif;}
+a:focus, a:hover{text-decoration: none;}
+.no-padding{padding:0px;}
+.hide{display:none;}
+
+#tool{position: absolute;top: 5px; text-align: center; width: 100%;z-index:100;}
+
+
+/* dock menu */
+.dock {
+	position: relative;
+	height: 50px;
+	text-align: center;
+}
+.dock-container {
+	position: absolute;
+	height: 50px;
+	padding-left: 20px;
+}
+a.dock-item {
+	display: block;
+	width: 40px;
+	color: #000;
+	position: absolute;
+	bottom: 0px;
+	text-align: center;
+	text-decoration: none;
+	font: bold 12px Arial, Helvetica, sans-serif;
+}
+.dock-item img {
+	border: none;
+	margin: 5px 10px 0px;
+	width: 100%;
+}
+.dock-item span {
+	display: none;
+	padding-left: 20px;
+}
+
+@media screen and (max-width: 767px){
+  canvas{height:500px;background:#ddd;}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  canvas{height:500px;background:#ddd;}
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  canvas{height:600px;background:#ddd;}
+}
+@media (min-width: 992px) and (max-width: 1199px)and (orientation: landscape){
+  canvas{height:600px;background:#ddd;}
+}
+
+@media screen and (min-width: 1200px) {
+  .main{height:100%;}
+  .first-row{height:90%;border-bottom:1px solid #ccc;}
+  .col-sx{border-right:1px solid #ccc;}
+  #draw-canvas{width:100% !important; height:100% !important; z-index:3;}
+}

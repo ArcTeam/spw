@@ -1,27 +1,99 @@
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,200,700);
 @import url("reset.css");
-body { font-family:'Titillium', arial, sans-serif;font-size:1rem; }
+body {font-family: "Titillium",Helvetica,Arial,sans-serif; font-size: 14px; line-height: 1.42857143; color: #333; background-color: #fff;}
 ul {list-style-type:none;margin:0px;padding:0px;}
 li {display:inline-block; cursor:pointer;}
 #container{position:relative; width:100%;height:100%;margin:0px;padding:0px;z-index:1;}
-.main {position:absolute !important;top:0px; left:0px;width:70% !important; height:85% !important;margin:0px;z-index:2;border-bottom:1px solid #ccc;}
-#description{position:absolute !important;top:0px;right:0px;width:30%;height:100%;margin:0px auto;border-left:1px solid #ccc;}
-#descWrap{position:relative; width:90%; margin:0px auto;}
-#descWrap p{margin-bottom:10px;text-align:justify;}
-#descWrap small{font-size:0.8rem;}
-#descFooter{text-align:center;}
-#modelName{font-size:1.2rem;border-bottom: 1px solid #000; width: 70%; margin-bottom: 15px; padding-bottom: 5px;}
-#modelDescription{position:relative; height:45%;border-bottom:1px solid #ccc;overflow:auto;margin-bottom:10px;}
-#modelPhoto{position:relative;height:42%;background:#ccc;background-position: center center;background-repeat: no-repeat; background-size: cover; margin: 0 auto;}
-#thumb{position:absolute !important;bottom:0px;left:0px; width:70%;height:15%;margin:0px;z-index:1000;text-align:center;}
-#thumbWrap{position:relative;width:100%;height:50%;margin:2% 0px;}
-#thumbList li img{vertical-align:middle;margin:0px 1px;}
-#tool{position:absolute;top:5px;left:0px;width:100%; text-align:center;z-index:100;}
-#toolList li{background:#ccc;padding:5px;border-radius:5px; width:30px;height:30px;text-align:center;vertical-align:middle;}
-#toolList li:hover{background:#636363;color:#cccccc;}
-#draw-canvas{width:100% !important; height:100% !important; z-index:3;}
-#tdhlg { overflow:hidden; right:2; bottom:2; width:105px; height:13px; cursor:pointer; color:#909090; text-decoration:none; font-family:verdana; font-style:italic; font-size:10px; line-height:13px; position:absolute;}
-#light_on{color:#FFBD00 !important;background:#636363 !important;}
-.green{color:#86CE4A;background:#86CE4A;}
-.red{color:#AB1300;background:#AB1300;}
-.blue{color:#0F0F5A;background:#0F0F5A;}
+
+
+
+
+@media screen and (max-width: 767px){
+  .main, #description{position:relative;width:100%; height:50%;z-index:1;}
+  #tool{position:absolute;top:0px;left:0px;width:100%;text-align:center;z-index:2}
+  #toolList>li{ padding: 10px; background: #ccc; display: inline-block; width: 30px;border-radius:5px;}
+
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .main{width:100%; height:50%;}
+  #tool{position:absolute;top:0px;left:0px;width:100%;text-align:center;z-index:2}
+
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .main, #description, #thumb, #tool,#tdhlg{position:absolute;}
+  .main{width:70%; height:85%;}
+  .main {top:0px; left:0px;margin:0px;z-index:2;border-bottom:1px solid #ccc;}
+  #description{top:0px;right:0px;width:30%;height:100%;margin:0px auto;border-left:1px solid #ccc;}
+  #descWrap{position:relative; width:90%; margin:0px auto;}
+  #descWrap p{margin-bottom:10px;text-align:justify;}
+  #descWrap small{font-size:0.8rem;}
+  #descFooter{text-align:center;}
+  #modelName{font-size:1.2rem;border-bottom: 1px solid #000; width: 70%; margin-bottom: 15px; padding-bottom: 5px;}
+  #modelDescription{position:relative; height:45%;border-bottom:1px solid #ccc;overflow:auto;margin-bottom:10px;}
+  #modelPhoto{position:relative;height:42%;background:#ccc;background-position: center center;background-repeat: no-repeat; background-size: cover; margin: 0 auto;}
+  #thumb{bottom:0px;left:0px; width:70%;height:15%;margin:0px;z-index:1000;text-align:center;}
+  #thumbWrap{position:relative;width:100%;height:50%;margin:2% 0px;}
+  #thumbList li img{vertical-align:middle;margin:0px 1px;}
+  #tool{top:5px;left:0px;width:100%; text-align:center;z-index:100;}
+  #toolList li{background:#ccc;padding:5px;border-radius:5px; width:30px;height:30px;text-align:center;vertical-align:middle;}
+  #toolList li:hover{background:#636363;color:#cccccc;}
+  #draw-canvas{width:100% !important; height:100% !important; z-index:3;}
+  #tdhlg{ overflow:hidden; right:2; bottom:2; width:105px; height:13px; cursor:pointer; color:#909090; text-decoration:none; font-family:verdana; font-style:italic; font-size:10px; line-height:13px;}
+  #light_on{color:#FFBD00 !important;background:#636363 !important;}
+  .green{color:#86CE4A;background:#86CE4A;}
+  .red{color:#AB1300;background:#AB1300;}
+  .blue{color:#0F0F5A;background:#0F0F5A;}
+
+}
+@media (min-width: 992px) and (max-width: 1199px)and (orientation: landscape){
+  .main, #description, #thumb, #tool,#tdhlg{position:absolute;}
+  .main{width:70%; height:85%;}
+  .main {top:0px; left:0px;margin:0px;z-index:2;border-bottom:1px solid #ccc;}
+  #description{top:0px;right:0px;width:30%;height:100%;margin:0px auto;border-left:1px solid #ccc;}
+  #descWrap{position:relative; width:90%; margin:0px auto;}
+  #descWrap p{margin-bottom:10px;text-align:justify;}
+  #descWrap small{font-size:0.8rem;}
+  #descFooter{text-align:center;}
+  #modelName{font-size:1.2rem;border-bottom: 1px solid #000; width: 70%; margin-bottom: 15px; padding-bottom: 5px;}
+  #modelDescription{position:relative; height:45%;border-bottom:1px solid #ccc;overflow:auto;margin-bottom:10px;}
+  #modelPhoto{position:relative;height:42%;background:#ccc;background-position: center center;background-repeat: no-repeat; background-size: cover; margin: 0 auto;}
+  #thumb{bottom:0px;left:0px; width:70%;height:15%;margin:0px;z-index:1000;text-align:center;}
+  #thumbWrap{position:relative;width:100%;height:50%;margin:2% 0px;}
+  #thumbList li img{vertical-align:middle;margin:0px 1px;}
+  #tool{top:5px;left:0px;width:100%; text-align:center;z-index:100;}
+  #toolList li{background:#ccc;padding:5px;border-radius:5px; width:30px;height:30px;text-align:center;vertical-align:middle;}
+  #toolList li:hover{background:#636363;color:#cccccc;}
+  #draw-canvas{width:100% !important; height:100% !important; z-index:3;}
+  #tdhlg{ overflow:hidden; right:2; bottom:2; width:105px; height:13px; cursor:pointer; color:#909090; text-decoration:none; font-family:verdana; font-style:italic; font-size:10px; line-height:13px;}
+  #light_on{color:#FFBD00 !important;background:#636363 !important;}
+  .green{color:#86CE4A;background:#86CE4A;}
+  .red{color:#AB1300;background:#AB1300;}
+  .blue{color:#0F0F5A;background:#0F0F5A;}
+}
+
+@media screen and (min-width: 1200px) {
+  .main, #description, #thumb, #tool,#tdhlg{position:absolute;}
+  .main{width:70%; height:85%;}
+  .main {top:0px; left:0px;margin:0px;z-index:2;border-bottom:1px solid #ccc;}
+  #description{top:0px;right:0px;width:30%;height:100%;margin:0px auto;border-left:1px solid #ccc;}
+  #descWrap{position:relative; width:90%; margin:0px auto;}
+  #descWrap p{margin-bottom:10px;text-align:justify;}
+  #descWrap small{font-size:0.8rem;}
+  #descFooter{text-align:center;}
+  #modelName{font-size:1.2rem;border-bottom: 1px solid #000; width: 70%; margin-bottom: 15px; padding-bottom: 5px;}
+  #modelDescription{position:relative; height:45%;border-bottom:1px solid #ccc;overflow:auto;margin-bottom:10px;}
+  #modelPhoto{position:relative;height:42%;background:#ccc;background-position: center center;background-repeat: no-repeat; background-size: cover; margin: 0 auto;}
+  #thumb{bottom:0px;left:0px; width:70%;height:15%;margin:0px;z-index:1000;text-align:center;}
+  #thumbWrap{position:relative;width:100%;height:50%;margin:2% 0px;}
+  #thumbList li img{vertical-align:middle;margin:0px 1px;}
+  #tool{top:5px;left:0px;width:100%; text-align:center;z-index:100;}
+  #toolList li{background:#ccc;padding:5px;border-radius:5px; width:30px;height:30px;text-align:center;vertical-align:middle;}
+  #toolList li:hover{background:#636363;color:#cccccc;}
+  #draw-canvas{width:100% !important; height:100% !important; z-index:3;}
+  #tdhlg{ overflow:hidden; right:2; bottom:2; width:105px; height:13px; cursor:pointer; color:#909090; text-decoration:none; font-family:verdana; font-style:italic; font-size:10px; line-height:13px;}
+  #light_on{color:#FFBD00 !important;background:#636363 !important;}
+  .green{color:#86CE4A;background:#86CE4A;}
+  .red{color:#AB1300;background:#AB1300;}
+  .blue{color:#0F0F5A;background:#0F0F5A;}
+
+}
