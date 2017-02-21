@@ -17,6 +17,7 @@
 
   </head>
   <body>
+    <div id="loader"></div>
     <div class="container-fluid main">
       <div class="col-lg-9 main col-sx">
         <div class="row first-row">
@@ -26,13 +27,11 @@
                 <button id="showMobile" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
                 </button>
-                <ul id="model-list" class="dropdown-menu">
-
-                </ul>
-                <button id="home" type="button" class="btn btn-default" title="Torna allo zoom iniziale"><i class="fa fa-home fa-2x"></i></button>
-                <button id="zoomin" title="Zoom in" type="button" class="btn btn-default"><i class="fa fa-search-plus fa-2x"></i></button>
-                <button id="zoomout" title="Zoom out" type="button" class="btn btn-default"><i class="fa fa-search-minus fa-2x"></i></button>
-                <button id="light" title="Light On/Off" type="button" class="btn btn-default"><i class="fa fa-lightbulb-o fa-2x"></i></button>
+                <ul id="model-list" class="dropdown-menu"></ul>
+                <button data-action="home" type="button" class="btn btn-default action" title="Torna allo zoom iniziale"><i class="fa fa-home fa-2x"></i></button>
+                <button data-action="zoomin" title="Zoom in" type="button" class="btn btn-default action"><i class="fa fa-search-plus fa-2x"></i></button>
+                <button data-action="zoomout" title="Zoom out" type="button" class="btn btn-default action"><i class="fa fa-search-minus fa-2x"></i></button>
+                <button id="light" data-action="light" title="Light On/Off" type="button" class="btn btn-default action"><i class="fa fa-lightbulb-o fa-2x"></i></button>
 
               </div>
             </div>
@@ -49,12 +48,16 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3">
-        <div class="row">
-          <div id="description" class="col-xs-12">
-            <h1 id="modelName">Model: <span></span></h1>
+      <div class="col-lg-3 main">
+        <div id="description" class="col-xs-12 main">
+          <div class="row">
+            <h2 id="modelName"></h2>
             <div id="modelDescription"></div>
+          </div>
+          <div class="row">
             <div id="modelPhoto"></div>
+          </div>
+          <div class="row">
             <div id="descFooter">
               <small>
                 Created by <a href="http://www.arc-team.com" target="_blank" title="[external link] go to arc-team website">Arc-Team</a> |
@@ -64,7 +67,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </body>
@@ -90,7 +92,7 @@
       thumb.push({img:'icons/spw04.png', foto:'spw04.jpg', name:'Straßen',desc:'<p>Vom Heissenwiesele bis zur Ringlerwiese verläuft der sogenannte „Knittelweg“. Auf mehreren längsgerichteten Stangen wurde eine Reihe von etwa 8 bis 10 cm dicken Rundhölzern gelegt und mit Drahtschlingen verknüpft. Trotz der Bodenlage und der Bewitterung haben sich über eine Länge von rund 600 Metern große Teile dieser Straßenbefestigung erhalten. Zum Knittelweg gehören auch die Reste einer Holzbrücke, über die ein Seitenast der Straé zum Knollkopf führte. Ihr Bau wird dem Deutschen Alpenkorps im Jahr 1915 zugeschrieben.</p>',tag:'spw04'});
       thumb.push({img:'icons/spw05.png', foto:'spw05.jpg', name:'Unterstände',desc:'<p>Um Unterstände vor Artilleriefeuer zu schützen, wurden sie häufig an der dem Feind abgewendeten Seite von Felswänden erbaut. Dazu wurden rechteckige Nischen in den Fels gebrochen und Terrassen geschaffen, auf denen dann die Holzgebäude errichtet werden konnten. In diesem Fall wurde auf dem Weg vom Knoll- zum Rautkopf eine künstliche Terrasse mit Beton gegossen. Vom hölzernen Aufbau sind hier nur wenige Spuren erhalten geblieben.</p>',tag:'spw05'});
       thumb.push({img:'icons/spw06.png', foto:'spw06.jpg', name:'Ein Denkmal',desc:'<p>Dieser Steinpfeiler auf dem Strudelsattel wurde als Denkmal für den Einsatz des Deutschen Alpenkorps auf der Plätzwiese im Jahr 1915 errichtet. Er steht in einer Reihe mit ähnlichen Monumenten, die von den deutschen Gebirgstruppen vor deren Abzug im Herbst 1915 errichtet worden sind. Ursprünglich soll sich auch eine Inschrift auf dem Pfeiler befunden haben. Sie ist in der faschistischen Ära jedoch verschwunden.</p>',tag:'spw06'});
-      thumb.push({img:'icons/spw07.png', foto:'spw07.jpg', name:'Unterkunftobjekt I',desc:'<p>Dieses makante Gebäude befindet sich auf dem Strudelsattel und liegt auf dem höchsten Punkt des Verbindungsweges vom Werk Landro zum Werk Plätzwiese. Seine Errichtung geht auf das Jahr 1914/15 zurück und ist somit in die Zeit der Kriegsvorbereitungen zu datieren. Es wird in den militärischen Unterlagen der k.u.k. Armee als „Unterkunftsobjekt I“ bezeichnet. Das rund 100m2 große Gebäude wurde aus gemauerten Bruchsteinen errichtet und hatte ursprünglich eine flaches Betondach. Das Dach wurde wahrscheinlich nach dem Krieg zur Gewinnung der verbauten Eisenschienen entfernt. Haufen von dessen Betontrümmern liegen rund um das Gebäude verteilt.</p><h2>Hauptraum</h2><p>Im Hauptraum des Unterkunftsobjektes I konnten laut militärischen Unterlagen 50 Soldaten 	untergebracht werden. Die Fenster dienten zugleich als Schießscharten.</p><h2>Offiziersunterkunft</h2><p>In diesem Raum waren bis zu drei Offiziere untergebacht. Darunter befand sich ein Proviantkeller, der auch von außen zugänglich war.</p><h2>Küche</h2><p>In diesem Raum befand sich die Küche mit einer Zisterne. Hier haben sich im Inneren noch Trümmer des Daches erhalten.</p>',tag:'spw07'});
+      thumb.push({img:'icons/spw07.png', foto:'spw07.jpg', name:'Unterkunftobjekt I',desc:'<p>Dieses makante Gebäude befindet sich auf dem Strudelsattel und liegt auf dem höchsten Punkt des Verbindungsweges vom Werk Landro zum Werk Plätzwiese. Seine Errichtung geht auf das Jahr 1914/15 zurück und ist somit in die Zeit der Kriegsvorbereitungen zu datieren. Es wird in den militärischen Unterlagen der k.u.k. Armee als „Unterkunftsobjekt I“ bezeichnet. Das rund 100m2 große Gebäude wurde aus gemauerten Bruchsteinen errichtet und hatte ursprünglich eine flaches Betondach. Das Dach wurde wahrscheinlich nach dem Krieg zur Gewinnung der verbauten Eisenschienen entfernt. Haufen von dessen Betontrümmern liegen rund um das Gebäude verteilt.</p><h3>Hauptraum</h3><p>Im Hauptraum des Unterkunftsobjektes I konnten laut militärischen Unterlagen 50 Soldaten 	untergebracht werden. Die Fenster dienten zugleich als Schießscharten.</p><h3>Offiziersunterkunft</h3><p>In diesem Raum waren bis zu drei Offiziere untergebacht. Darunter befand sich ein Proviantkeller, der auch von außen zugänglich war.</p><h3>Küche</h3><p>In diesem Raum befand sich die Küche mit einer Zisterne. Hier haben sich im Inneren noch Trümmer des Daches erhalten.</p>',tag:'spw07'});
       thumb.push({img:'icons/spw08.png', foto:'spw08.jpg', name:'Ein Andenken aus Prag',desc:'<p>An der Rückwand des sogenannten „Unterkunftsobjektes II“ in der Strudl, haben sich beim Bau des Gebäudes mehrere Soldaten im frischen Mörtel mit ihren Namen und ihrer Heimatstadt verewigt. Der multinationale Charakter des Habsburgerreiches läßt sich hier sehr gut ablesen, denn die Soldaten stammten aus Prag im damaligen Königreich Böhmen: Gut lassen sich noch die Namen R. KUPAT, H. KASTNER und PAN PODAPKA lesen, allesamt aus PRAHA (Prag). Ein weiterer Name links unten ist nicht mehr sicher lesbar.</p>',tag:'spw08'});
       thumb.push({img:'icons/spw09.png', foto:'spw09.jpg',name:'Munitionsdepot',desc:'<p>Ebenfalls in die unmittelbare Vorkriegszeit fällt die Errichtung der sog. „Kampfanlage Strudelalpe-Geierwand“ zu der auch die Unterkunftsobjekte gehörten. Sie bestand aus offenen Artilleriestellungen, Verbindungswegen, Beobachtungspositionen und Munitionsdepots. Hier sehen wir die Reste des sogenannten „Munitionsunterstandes Nr. 8“, wenige Meter vom „Kanonenstand Nr. 4“ entfernt. Das Depot war in den Boden eingetieft und bot der empfindlichen Munitions damit zusätzlichen Schutz. Auch in diesem Fall ist das Fehlen des Daches wahrscheinlich auf einen Abbau nach dem Krieg zurückzuführen.</p>',tag:'spw09'});
       thumb.push({img:'icons/spw10.png', foto:'spw10.jpg',name:'Beobachter',desc:'<p>Im Ersten Weltkrieg war die Artillerie immer auf sogenannte "Artilleriebeobachter" angewiesen, welche den Geschützbesatzungen ihre Ziele angaben und die Wirkung der Schüsse beim Feind beobachteten. Sie gaben meist über Telephon Korrekturen an die Kanoniere weiter, wenn diese das anvisierte Ziel verfehlt hatten. Zur "Kampfanlage Strudelalpe-Geierwand“ gehörten 3 „Beobachtungsstände". Hier sehen wir das Modell von Nummer 2. Der Betonbau ist wiederum in die Erde eingetieft um wenig Angriffsfläche zu bieten. Von hier aus konnte man in Richtung Rautkofel, Schwalbenkofel, Rienztal, Monte Piano und Paludi di Misurina beobachten.</p>',tag:'spw10'});
@@ -235,7 +237,6 @@
           else if(action=='zoomout') presenter.zoomOut();
           else if(action=='light' || action=='light_on') { presenter.enableLightTrackball(!presenter.isLightTrackballEnabled()); lightSwitch(); }
       }
-
       $(document).ready(function(){
           init3dhop();
           setup3dhop();
@@ -248,26 +249,31 @@
           });
           $(".change-model").click(function(){
             $("#modelDescription").html($(this).data('desc'));
-            $("#modelName span").html($(this).data('name'));
+            $("#modelName").html($(this).data('name'));
             $("#modelPhoto").css('background-image', 'url(foto/thumb/' + $(this).data('foto') + ')');
             presenter.setInstanceVisibility('Group', false, false);
             presenter.setInstanceVisibilityByName($(this).data('tag'), true, true);
           });
-          $("#modelName span").html($(".dock-item:first-child()").data('name'));
+          $("#modelName").html($(".dock-item:first-child()").data('name'));
           $("#modelDescription").html($(".dock-item:first-child()").data('desc'));
           $("#modelPhoto").css('background-image', 'url(foto/thumb/' + $(".dock-item:first-child()").data('foto') + ')');
 
           $('#dock').Fisheye({
-            maxWidth: 60,
+            maxWidth: 70,
             items: 'a',
             itemsText: 'span',
             container: '.dock-container',
-            itemWidth: 40,
-            proximity: 80,
+            itemWidth: 60,
+            proximity: 90,
             alignment : 'left',
             valign: 'bottom',
             halign : 'center'
           });
       });
+      document.onreadystatechange = function () {
+        if (document.readyState === "complete") {
+          document.getElementById("loader").style.display = "none";
+        }
+      }
   </script>
 </html>

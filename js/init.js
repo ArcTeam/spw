@@ -20,8 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 function init3dhop() {
     var interval, id, ismousedown;
     var button = 0;
-    $('#toolList li')
-        .mouseenter(function(e) { id = $(this).attr('id'); })
+    $('.action')
+        .mouseenter(function(e) { id = $(this).data('action'); })
         .mouseout(function(e) { clearInterval(interval); })
         .mousedown(function(e) {
             ismousedown = true;
@@ -53,7 +53,7 @@ function init3dhop() {
 
 function lightSwitch() {
     var on = presenter.isLightTrackballEnabled();
-    if(on){$('#light').attr("id",'light_on');}else{ $('#light_on').attr("id",'light'); }
+    if(on){$('#light').data("action",'light_on');}else{ $('#light').data("action",'light'); }
 }
 function resizeCanvas(w,h) {
   $('#draw-canvas').attr('width', w);
@@ -65,15 +65,8 @@ function resizeCanvas(w,h) {
 function getDevice(){
   return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
 }
+
 function setMenu(){
   var get = getDevice();
-  //var set;
-  if (get){
-    //set = 'mobile';
-    $("#thumb").hide();
-  }else{
-    $("#showMobile").hide();
-    //set = "desktop";
-  }
-  //return set;
+  if (get){ $("#thumb").hide(); }else{ $("#showMobile").hide(); }
 }
